@@ -74,6 +74,7 @@ function SelectField<T extends FieldValues>({
             fontSize="14px"
             lineHeight="1.25"
             border="1px solid black"
+            bg="white"
             _hover={{}}
             {...props}
             {...register(name, rules)}

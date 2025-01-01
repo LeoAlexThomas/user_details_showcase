@@ -18,6 +18,9 @@ const Header = ({
       bg="gray.300"
       p={4}
       justifyContent="space-between"
+      pos="sticky"
+      top={0}
+      zIndex={10}
     >
       <Text
         fontFamily="Playfair Display"

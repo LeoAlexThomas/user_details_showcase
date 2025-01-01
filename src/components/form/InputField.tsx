@@ -68,6 +68,7 @@ function InputField<T extends FieldValues>({
             lineHeight="1.25"
             border="1px solid black"
             _hover={{}}
+            bg="white"
             {...props}
             {...register(name, rules)}
           />

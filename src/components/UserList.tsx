@@ -21,6 +21,8 @@ import { createUserFormId } from "./utils";
 import { UserAdd } from "emotion-icons/heroicons-outline";
 import UserCard from "./UserCard";
 import { useFilterData } from "@/contexts/filterContext";
+import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SeondaryButton";
 
 const UserList = ({
   users,
@@ -72,12 +74,12 @@ const UserList = ({
   const getFormFooter = () => {
     return (
       <HStack>
-        <Button type="submit" form={createUserFormId}>
+        <PrimaryButton type="submit" form={createUserFormId}>
           Create
-        </Button>
-        <Button variant="outline" onClick={onCreateUserModalClose}>
+        </PrimaryButton>
+        <SecondaryButton onClick={onCreateUserModalClose}>
           Close
-        </Button>
+        </SecondaryButton>
       </HStack>
     );
   };
@@ -140,14 +142,25 @@ const UserList = ({
         isOpen={isUserDeleteModalOpen}
         onClose={handleDeleteUserModelClose}
         title="Confirmation!!!"
-        footer={<Button onClick={handleDelete}>Delete</Button>}
+        footer={
+          <PrimaryButton
+            bg="red.400"
+            _hover={{
+              bg: "red.500",
+            }}
+            color="white"
+            onClick={handleDelete}
+          >
+            Delete
+          </PrimaryButton>
+        }
       >
         <Text
           fontFamily="Noto Serif"
           fontSize={["14px", null, "18px"]}
           fontWeight={500}
           lineHeight="1.25"
-          pb={12}
+          pb={20}
         >
           Are you sure you want to delete this user?
         </Text>
@@ -156,6 +169,7 @@ const UserList = ({
         templateColumns={["1fr", null, "1fr 1fr", null, null, "1fr 1fr 1fr"]}
         spacing={4}
         p={4}
+        pb={20}
       >
         {filteredUsers.map((user) => (
           <Fragment key={user.id}>
@@ -183,8 +197,8 @@ const AddNewUser = ({ onClick }: { onClick: () => void }) => {
       w={isMobile ? "40px" : "50px"}
       h={isMobile ? "40px" : "50px"}
       position="fixed"
-      bottom={10}
-      right={10}
+      bottom={5}
+      right={[4, null, null, null, null, 8]}
       _hover={{
         bg: "gray.300",
       }}
@@ -194,7 +208,7 @@ const AddNewUser = ({ onClick }: { onClick: () => void }) => {
 
 const UserNotFound = ({ onReset }: { onReset: () => void }) => {
   return (
-    <Center h="90vh">
+    <Center h="100%">
       <VStack spacing={4} p={6}>
         <Text fontFamily="Noto Serif" fontSize={["16px", null, "20px"]}>
           User not found

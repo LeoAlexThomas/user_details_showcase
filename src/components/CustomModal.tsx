@@ -37,12 +37,17 @@ const CustomModal = ({
           fontFamily="Playfair Display"
           fontSize={["20px", null, "28px"]}
           fontWeight={800}
+          h="60px"
         >
           {title}
         </ModalHeader>
         <ModalCloseButton />
-        <ModalBody>{children}</ModalBody>
-        {!isNil(footer) && <ModalFooter {...footerProps}>{footer}</ModalFooter>}
+        <ModalBody bg="gray.100">{children}</ModalBody>
+        {!isNil(footer) && (
+          <ModalFooter h="60px" {...footerProps}>
+            {footer}
+          </ModalFooter>
+        )}
       </ModalContent>
     </Modal>
   );

@@ -18,6 +18,8 @@ import isNil from "lodash/isNil";
 import { useEffect } from "react";
 import Loader from "@/components/Loader";
 import ErrorMsg from "@/components/ErrorMsg";
+import PrimaryButton from "@/components/PrimaryButton";
+import SecondaryButton from "@/components/SeondaryButton";
 
 const HomePage = () => {
   const { resetValues, onFilteredUsersChange } = useFilterData();
@@ -67,6 +69,10 @@ const HomePage = () => {
       <HStack w="100%" justifyContent="space-between">
         <Button
           variant="ghost"
+          bg="blue.50"
+          _hover={{
+            bg: "blue.100",
+          }}
           onClick={() => {
             handleFormReset();
             onClose();
@@ -75,12 +81,10 @@ const HomePage = () => {
           Reset
         </Button>
         <HStack>
-          <Button type="submit" form={filterFormId}>
+          <PrimaryButton type="submit" form={filterFormId}>
             Filter
-          </Button>
-          <Button variant="outline" onClick={onClose}>
-            Close
-          </Button>
+          </PrimaryButton>
+          <SecondaryButton onClick={onClose}>Close</SecondaryButton>
         </HStack>
       </HStack>
     );
@@ -92,11 +96,12 @@ const HomePage = () => {
         <title>User Details</title>
       </Head>
       <VStack
-        h="100%"
         w="100%"
         backgroundColor="gray.300"
         spacing={4}
         alignItems="stretch"
+        h="100vh"
+        overflowY="auto"
       >
         {/* --------- FilterModel ------------ */}
         <CustomModal

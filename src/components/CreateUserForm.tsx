@@ -63,6 +63,7 @@ const CreateUserForm = ({
           alignItems="stretch"
           border="1px solid #00000050"
           borderRadius="8px"
+          bg="white"
           p={4}
           mt={2}
         >
