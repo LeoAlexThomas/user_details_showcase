@@ -10,20 +10,6 @@ import { SWRConfig } from "swr";
 
 export const swrConfigData = {
   fetcher: api,
-  onErrorRetry: (
-    error: any,
-    key: any,
-    option: any,
-    revalidate: any,
-    { retryCount }: any
-  ) => {
-    if (retryCount >= 10) return;
-    const status = error.response?.status;
-
-    if (status >= 400 && status < 500) return;
-
-    setTimeout(() => revalidate({ retryCount: retryCount + 1 }), 5000);
-  },
 };
 
 type NextPageWithLayout = NextPage & {

@@ -1,8 +1,8 @@
-import { Box, Grid, SimpleGrid, Text, VStack } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 import { createUserFormId, roleOptions } from "./utils";
 import { useForm } from "react-hook-form";
 import InputField from "./form/InputField";
-import { CreateUserInterface, RoleEnum, UserInterface } from "@/types/user";
+import { CreateUserInterface, RoleEnum } from "@/types/user";
 import SelectField from "./form/SelectField";
 
 const CreateUserForm = ({
