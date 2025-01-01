@@ -1,5 +1,4 @@
 import { filterFormId } from "@/components/utils";
-import WithLoader from "@/components/WithLoader";
 import {
   PaginationInterface,
   UserFilterForm,
