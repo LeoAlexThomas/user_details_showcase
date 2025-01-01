@@ -1,40 +1,47 @@
-import { useForm, UseFormReturn } from "react-hook-form";
-import { RoleEnum, UserFilterForm } from "../types/user";
-import { useRouter } from "next/router";
+import { UseFormReturn } from "react-hook-form";
+import { UserFilterForm } from "@/types/user";
 import { useEffect } from "react";
-import { isEmpty, isNil, isString } from "lodash";
-import { checkCustomRoutes } from "next/dist/lib/load-custom-routes";
-import { filterFormId, getUserRole, roleOptions } from "./utils";
-import { Button, HStack, VStack } from "@chakra-ui/react";
-import InputField from "./form/InputField";
-import SelectField from "./form/SelectField";
+import isNil from "lodash/isNil";
+import isEmpty from "lodash/isEmpty";
+import { filterFormId, roleOptions } from "./utils";
+import { VStack } from "@chakra-ui/react";
+import InputField from "@/components/form/InputField";
+import SelectField from "@/components/form/SelectField";
+import { useFilterData } from "@/contexts/filterContext";
 
-const FilterForm = ({ form }: { form: UseFormReturn<UserFilterForm> }) => {
-  const router = useRouter();
-  const path = router.asPath;
-  const name = router.query.name;
-  const companyName = router.query.companyName;
-  const role = router.query.role;
+const FilterForm = ({
+  form,
+  onFormSubmit,
+}: {
+  form: UseFormReturn<UserFilterForm>;
+  onFormSubmit: () => void;
+}) => {
+  const {
+    name,
+    onNameChange,
+    companyName,
+    onCompanyNameChange,
+    role,
+    onRoleChange,
+  } = useFilterData();
 
   useEffect(() => {
     form.reset({
-      name: !isNil(name) && isString(name) && isEmpty(name.trim()) ? name : "",
-      companyName:
-        !isNil(companyName) &&
-        isString(companyName) &&
-        isEmpty(companyName.trim())
-          ? companyName
-          : "",
-      role: !isNil(role) && isString(role) ? getUserRole(role) : null,
+      name: name,
+      companyName: companyName,
+      role: role,
     });
   }, [name, companyName, role]);
 
   const onSubmit = (values: UserFilterForm) => {
-    router.push(
-      `/?name=${values.name}&companyName=${values.companyName}&role=${
-        values.role ?? ""
-      }`
-    );
+    if (!isNil(values.name) && !isEmpty(values.name.trim())) {
+      onNameChange(values.name);
+    }
+    if (!isNil(values.companyName) && !isEmpty(values.companyName.trim())) {
+      onCompanyNameChange(values.companyName);
+    }
+    onRoleChange(values.role);
+    onFormSubmit();
   };
 
   return (

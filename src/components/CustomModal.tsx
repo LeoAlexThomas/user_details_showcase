@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { isNil } from "lodash";
+import isNil from "lodash/isNil";
 const CustomModal = ({
   isOpen,
   onClose,
@@ -25,7 +25,12 @@ const CustomModal = ({
   children: React.ReactNode;
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      isCentered
+      size={["xs", "md", "lg"]}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader

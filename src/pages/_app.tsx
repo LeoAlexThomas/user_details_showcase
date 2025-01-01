@@ -1,4 +1,5 @@
 import api from "@/components/api";
+import { FilterDataProvider } from "@/contexts/filterContext";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AppProps } from "next/app";
 import Head from "next/head";
@@ -49,7 +50,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <SWRConfig value={swrConfigData}>
         <ChakraProvider>
-          {getLayout(<Component {...pageProps} key={router.asPath} />)}
+          <FilterDataProvider>
+            {getLayout(<Component {...pageProps} key={router.asPath} />)}
+          </FilterDataProvider>
         </ChakraProvider>
       </SWRConfig>
     </>
