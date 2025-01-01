@@ -9,6 +9,12 @@ export enum RoleEnum {
   user = "user",
 }
 
+export interface UserFilterForm {
+  name: string;
+  companyName: string;
+  role: RoleEnum | null;
+}
+
 export interface PaginationInterface<T> {
   users: T[];
   total: number;
@@ -46,7 +52,7 @@ export interface CompanyInterface {
   department: string;
   name: string;
   title: string;
-  address: AddressInterface;
+  address?: AddressInterface;
 }
 
 export interface CryptoInterface {
@@ -55,33 +61,40 @@ export interface CryptoInterface {
   network: string;
 }
 
+export interface CreateUserInterface {
+  username: string;
+  email: string;
+  company: CompanyInterface;
+  role: RoleEnum;
+}
+
 export interface UserInterface {
   id: number;
-  firstName: string;
-  lastName: string;
-  maidenName: string;
-  age: number;
-  gender: GenderEnum;
+  firstName?: string;
+  lastName?: string;
+  maidenName?: string;
+  age?: number;
+  gender?: GenderEnum;
   email: string;
-  phone: string;
+  phone?: string;
   username: string;
-  password: string;
-  birthDate: string;
-  image: string;
-  bloodGroup: string;
-  height: number;
-  weight: number;
-  eyeColor: string;
-  hair: UserHairInterface;
-  ip: string;
-  address: AddressInterface;
-  macAddress: string;
-  university: string;
-  bank: BankInterface;
+  password?: string;
+  birthDate?: string;
+  image?: string;
+  bloodGroup?: string;
+  height?: number;
+  weight?: number;
+  eyeColor?: string;
+  hair?: UserHairInterface;
+  ip?: string;
+  address?: AddressInterface;
+  macAddress?: string;
+  university?: string;
+  bank?: BankInterface;
   company: CompanyInterface;
-  ein: string;
-  ssn: string;
-  userAgent: string;
-  crypto: CryptoInterface;
+  ein?: string;
+  ssn?: string;
+  userAgent?: string;
+  crypto?: CryptoInterface;
   role: RoleEnum;
 }
