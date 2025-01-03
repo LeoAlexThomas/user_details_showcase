@@ -1,7 +1,7 @@
 import { RoleEnum, UserInterface } from "@/types/user";
 import isEmpty from "lodash/isEmpty";
 import isNil from "lodash/isNil";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface ContextInterface {
   name: string;
@@ -51,6 +51,25 @@ export const FilterDataProvider = ({
       count++;
     }
     return count === 0 ? null : count;
+  };
+
+  useEffect(() => {
+    updateUserListByFiltering();
+  }, [name, companyName, role]);
+
+  const updateUserListByFiltering = () => {
+    const updatedUsers = filteredUsers.filter((user) => {
+      return (
+        (isEmpty(name) ||
+          user.username.toLowerCase().includes(name.toLowerCase())) &&
+        (isEmpty(companyName) ||
+          user.company.name
+            .toLowerCase()
+            .includes(companyName.toLowerCase())) &&
+        (isNil(role) || user.role === role)
+      );
+    });
+    setFilteredUsers(updatedUsers);
   };
 
   const resetValues = () => {

@@ -12,7 +12,6 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import random from "lodash/random";
-import isNil from "lodash/isNil";
 import isEmpty from "lodash/isEmpty";
 import { useState, useEffect, Fragment } from "react";
 import CreateUserForm from "./CreateUserForm";
@@ -31,8 +30,7 @@ const UserList = ({
   users: UserInterface[];
   onReset: () => void;
 }) => {
-  const { name, companyName, role, filteredUsers, onFilteredUsersChange } =
-    useFilterData();
+  const { filteredUsers, onFilteredUsersChange } = useFilterData();
 
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
 
@@ -51,9 +49,8 @@ const UserList = ({
   } = useDisclosure();
 
   useEffect(() => {
-    // NOTE: Need to change from api users data to local users data
-    updateUserListByFiltering(users);
-  }, [users, name, companyName, role]);
+    onFilteredUsersChange(users);
+  }, [users]);
 
   const handleAddNewUser = (values: CreateUserInterface) => {
     const newUser: UserInterface = {
@@ -61,7 +58,6 @@ const UserList = ({
       ...values,
     };
     onFilteredUsersChange([...filteredUsers, newUser]);
-    updateUserListByFiltering([...filteredUsers, newUser]);
     onCreateUserModalClose();
     showToast({
       title: "New User Added",
@@ -82,21 +78,6 @@ const UserList = ({
         </SecondaryButton>
       </HStack>
     );
-  };
-
-  const updateUserListByFiltering = (userList: UserInterface[]) => {
-    const updatedUsers = userList.filter((user) => {
-      return (
-        (isEmpty(name) ||
-          user.username.toLowerCase().includes(name.toLowerCase())) &&
-        (isEmpty(companyName) ||
-          user.company.name
-            .toLowerCase()
-            .includes(companyName.toLowerCase())) &&
-        (isNil(role) || user.role === role)
-      );
-    });
-    onFilteredUsersChange(updatedUsers);
   };
 
   const handleDelete = () => {
